@@ -1,12 +1,14 @@
-====== Overview ======
+# Overview
 
 Lemon-filling is a tool to build localization into your application, complete with a localizer front-end. It works by breaking up this complex task by having the author think in three categories; **Locale**, **Terms** and **Pages**.
 
-====== Locale ======
+## Locale
+
 Locale is the language or languages your application will support. If it supports English and Deutch, then those are the locales. Also, the **localeid** would probably be 1 and 2, respectively.
 
 
-====== Terms ======
+## Terms
+
 Terms are any clump of text in your application. It could be a label in a form, or a paragraph in your help section. Terms are referenced by their **term_tag**.
 
 ^ term_tag      ^ term      ^
@@ -15,14 +17,19 @@ Terms are any clump of text in your application. It could be a label in a form, 
 | l_pass    | "Password:"     |
 
 For example, in your template, you could have:
+
+<pre>
 <code php>
 <label><?php echo $term['l_name'];?></label>
 </code>
+</pre>
 
-====== Pages ======
+## Pages 
+
 A page is any total 'page' for your application. For example if you have an 'Add Post' page in your app, you would create a page in the admin tool called 'add_post', and then attach any terms that would belong in that page.
 
-====== Overall Requirements ======
+# Overall Requirements
+
   * By passing a query a page-name and locale id, get all the terms for that page
   * Terms returned can be referenced by a tag for easy templating
   * Admin section is dead simple to use
@@ -37,24 +44,32 @@ A page is any total 'page' for your application. For example if you have an 'Add
   - Create new Page
   - Add Terms to that Page, there is first 40char on right
 
-====== Admin Area ======
-===== Locale =====
+# Admin Area
+
+## Locale
+
    * List of locales
    * Ability to add new / edit / delete
-===== Terms =====
+
+## Terms
+
    * Dropdown of current locale selected
    * List of all terms
      * term_tag
      * full term
    * Ability to add new term, and keep adding more with jQuery
    * Ability to edit existing, delete (which deletes for all locales)
-===== Pages =====
+
+## Pages
+
    * List of pages
    * Ability to add new page, adding terms to it with jQuery
    * Ability to edit page, where terms can be removed/added
    * Ability to delete page, deletes for all locales
 
-====== Schema ======
+# Schema
+
+<pre>
 <code mysql>
 CREATE TABLE IF NOT EXISTS locale (
     locale_id SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -108,8 +123,11 @@ ENGINE=InnoDB
 CHARACTER SET utf8 
 COLLATE utf8_general_ci;
 </code>
+</pre>
 
-===== Working Query =====
+# Working Query
+
+<pre>
 <code mysql>
 SELECT terms.value,
 	   rosetta.value       
@@ -121,8 +139,11 @@ INNER JOIN page ON page.page_id=page_group.page_id
 WHERE page.value='sign_in' AND locale.locale_id=1
 ORDER BY terms.terms_id
 </code>
+</pre>
 
-===== Demo of success =====
+# Demo of success
+
+<pre>
 <code>
 mysql> SELECT * FROM locale;
 +-----------+---------+
@@ -204,3 +225,5 @@ mysql> SELECT terms.value,
 | welcome_blurb | Welcome to appland Bitte melden Sie sich unten. |
 +---------------+-------------------------------------------------+
 </code>
+</pre>
+

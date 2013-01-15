@@ -3,17 +3,22 @@
 My big overview list of what needs to be done.
 
 ## Setup [1hr]
+
 * <del>Tweak htaccess </del>
 * <del>Config.php</del>
 * <del>Database.php</del>
 * <del>Build menu helpers</del>
 
 
-## Locale [0.5hr]
+## Locale [1.5hr]
+
 * <del>View</del>
-* Add
-* Edit
+* <del>Add</del>
+* <del>Edit</del>
 * Delete
+
+* Follow-up
+   * Tweak the delete once rosetta table is being used.
 
 ## Terms
 

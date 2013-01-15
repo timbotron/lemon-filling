@@ -21,6 +21,7 @@ My big overview list of what needs to be done.
 
 * Tweak the delete once rosetta table is being used.
 * Get bar graph in there, showing what percentage translation is at.
+* [i] possible when user clicks locale, they got to /terms with that locale set, and sorted so they can see what needs to be updated?
 
 ## Terms
 

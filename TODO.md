@@ -17,8 +17,10 @@ My big overview list of what needs to be done.
 * <del>Edit</del>
 * Delete
 
-* Follow-up
-   * Tweak the delete once rosetta table is being used.
+### Follow-up
+
+* Tweak the delete once rosetta table is being used.
+* Get bar graph in there, showing what percentage translation is at.
 
 ## Terms
 

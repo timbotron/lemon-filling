@@ -16,6 +16,7 @@ My big overview list of what needs to be done.
 * <del>Add</del>
 * <del>Edit</del>
 * Delete
+   * <del>Show count of terms defined in the locale.</del>
 
 ### Follow-up
 

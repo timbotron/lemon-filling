@@ -10,17 +10,16 @@ My big overview list of what needs to be done.
 * <del>Build menu helpers</del>
 
 
-## Locale [1.5hr]
+## Locale [2.5hr]
 
 * <del>View</del>
 * <del>Add</del>
 * <del>Edit</del>
-* Delete
+* <del>Delete</del>
    * <del>Show count of terms defined in the locale.</del>
 
 ### Follow-up
 
-* Tweak the delete once rosetta table is being used.
 * Get bar graph in there, showing what percentage translation is at.
 * [i] possible when user clicks locale, they got to /terms with that locale set, and sorted so they can see what needs to be updated?
 

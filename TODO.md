@@ -25,8 +25,12 @@ My big overview list of what needs to be done.
 
 ## Terms
 
-* Index view
+* <del>Index view</del>
+   * This was a challange; see [my post](http://tim.hithlonde.com/2013/victory-over-a-big-wall/) on getting the query working correctly
+   * <del>js for changing chosen locale view</del>
+   * js for aditing list of terms for chosen locale
 * Add
+   * Be sure to have dropdown of what locale the initial definition is in
 * Edit term
 * Edit localized terms
 * Delete

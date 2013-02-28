@@ -1,6 +1,13 @@
+# Author
+* Tim Habersack
+* tim@hithlonde.com
+
+
 # Overview
 
 Lemon-filling is a tool to build localization into your application, complete with a localizer front-end. It works by breaking up this complex task by having the author think in three categories; **Locale**, **Terms** and **Pages**.
+
+A demo of the admin area of Lemon-filling can be [found here](http://lab.citracode.com/lemon-filling/)
 
 ## Locale
 
@@ -20,11 +27,7 @@ Terms are any clump of text in your application. It could be a label in a form, 
 
 For example, in your template, you could have:
 
-<pre>
-
-<label><?php echo $term['l_name'];?></label>
-
-</pre>
+<pre><label><?php echo $term['l_name'];?></label></pre>
 
 ## Pages 
 
@@ -35,39 +38,6 @@ A page is any total 'page' for your application. For example if you have an 'Add
   * By passing a query a page-name and locale id, get all the terms for that page
   * Terms returned can be referenced by a tag for easy templating
   * Admin section is dead simple to use
-
-====== Workflow ======
-===== Need to create first page =====
-  - By default, English is first language
-  - Go to Terms, default is first language
-  - Hit Add Terms
-  - Add all Terms that will appear on page
-  - Go to Pages
-  - Create new Page
-  - Add Terms to that Page, there is first 40char on right
-
-# Admin Area
-
-## Locale
-
-   * List of locales
-   * Ability to add new / edit / delete
-
-## Terms
-
-   * Dropdown of current locale selected
-   * List of all terms
-     * term_tag
-     * full term
-   * Ability to add new term, and keep adding more with jQuery
-   * Ability to edit existing, delete (which deletes for all locales)
-
-## Pages
-
-   * List of pages
-   * Ability to add new page, adding terms to it with jQuery
-   * Ability to edit page, where terms can be removed/added
-   * Ability to delete page, deletes for all locales
 
 # Schema
 
@@ -131,15 +101,20 @@ COLLATE utf8_general_ci;
 
 <pre>
 <code mysql>
-SELECT terms.value,
-	   rosetta.value       
-FROM locale
-RIGHT JOIN rosetta ON locale.locale_id=rosetta.locale_id
-INNER JOIN terms ON terms.terms_id=rosetta.terms_id
-INNER JOIN page_group ON page_group.terms_id=rosetta.terms_id
-INNER JOIN page ON page.page_id=page_group.page_id
-WHERE page.value='sign_in' AND locale.locale_id=1
-ORDER BY terms.terms_id
+SET @given_locale_id = 1;
+SELECT terms_value, MAX( rosetta_value ) rosetta_value
+FROM (
+ 
+  SELECT T.value terms_value, T.terms_id, R.value rosetta_value, R.locale_id
+  FROM terms T
+  LEFT JOIN rosetta R ON T.terms_id = R.terms_id
+  UNION
+  SELECT T.value, T.terms_id, '', @given_locale_id
+  FROM terms T        
+ 
+)A
+WHERE locale_id =@given_locale_id AND terms_id IN (SELECT terms_id FROM page_group INNER JOIN page ON page.page_id=page_group.page_id WHERE page.value='sign_in')
+GROUP BY terms_value;
 </code>
 </pre>
 
@@ -193,15 +168,23 @@ mysql> SELECT * FROM page_group;
 |             3 |       1 |        3 |
 +---------------+---------+----------+
 
-mysql> SELECT terms.value,
-    ->    rosetta.value       
-    -> FROM locale
-    -> RIGHT JOIN rosetta ON locale.locale_id=rosetta.locale_id
-    -> INNER JOIN terms ON terms.terms_id=rosetta.terms_id
-    -> INNER JOIN page_group ON page_group.terms_id=rosetta.terms_id
-    -> INNER JOIN page ON page.page_id=page_group.page_id
-    -> WHERE page.value='sign_in' AND locale.locale_id=1
-    -> ORDER BY terms.terms_id;
+---QUERY---
+SET @given_locale_id = 1;
+SELECT terms_value, MAX( rosetta_value ) rosetta_value
+FROM (
+ 
+  SELECT T.value terms_value, T.terms_id, R.value rosetta_value, R.locale_id
+  FROM terms T
+  LEFT JOIN rosetta R ON T.terms_id = R.terms_id
+  UNION
+  SELECT T.value, T.terms_id, '', @given_locale_id
+  FROM terms T        
+ 
+)A
+WHERE locale_id =@given_locale_id AND terms_id IN (SELECT terms_id FROM page_group INNER JOIN page ON page.page_id=page_group.page_id WHERE page.value='sign_in')
+GROUP BY terms_value;
+---END QUERY---
+
 +---------------+------------------------------------------+
 | value         | value                                    |
 +---------------+------------------------------------------+
@@ -210,22 +193,9 @@ mysql> SELECT terms.value,
 | welcome_blurb | Welcome to appland! Please log in below. |
 +---------------+------------------------------------------+
 
-mysql> SELECT terms.value,
-    ->    rosetta.value       
-    -> FROM locale
-    -> RIGHT JOIN rosetta ON locale.locale_id=rosetta.locale_id
-    -> INNER JOIN terms ON terms.terms_id=rosetta.terms_id
-    -> INNER JOIN page_group ON page_group.terms_id=rosetta.terms_id
-    -> INNER JOIN page ON page.page_id=page_group.page_id
-    -> WHERE page.value='sign_in' AND locale.locale_id=2
-    -> ORDER BY terms.terms_id;
-+---------------+-------------------------------------------------+
-| value         | value                                           |
-+---------------+-------------------------------------------------+
-| lname         | Benutzername:                                   |
-| lpass         | Passwort:                                       |
-| welcome_blurb | Welcome to appland Bitte melden Sie sich unten. |
-+---------------+-------------------------------------------------+
 </code>
 </pre>
 
+# License
+
+This is released as an open-source tool. The specific license will be added once I figure out what CodeIgniters license change means.

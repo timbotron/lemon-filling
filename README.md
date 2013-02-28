@@ -1,20 +1,17 @@
-# Author
-* Tim Habersack
-* tim@hithlonde.com
+# Lemon-filling
 
-
-# Overview
+## Overview
 
 Lemon-filling is a tool to build localization into your application, complete with a localizer front-end. It works by breaking up this complex task by having the author think in three categories; **Locale**, **Terms** and **Pages**.
 
 A demo of the admin area of Lemon-filling can be [found here](http://lab.citracode.com/lemon-filling/)
 
-## Locale
+### Locale
 
 Locale is the language or languages your application will support. If it supports English and Deutch, then those are the locales. Also, the **localeid** would probably be 1 and 2, respectively.
 
 
-## Terms
+### Terms
 
 Terms are any clump of text in your application. It could be a label in a form, or a paragraph in your help section. Terms are referenced by their **term_tag**.
 
@@ -25,21 +22,17 @@ Terms are any clump of text in your application. It could be a label in a form, 
   <tr><td>l_pass</td><td>"Password:"</td></tr>
 </table>
 
-For example, in your template, you could have:
-
-<pre><label><?php echo $term['l_name'];?></label></pre>
-
-## Pages 
+### Pages 
 
 A page is any total 'page' for your application. For example if you have an 'Add Post' page in your app, you would create a page in the admin tool called 'add_post', and then attach any terms that would belong in that page.
 
-# Overall Requirements
+## Overall Requirements
 
   * By passing a query a page-name and locale id, get all the terms for that page
   * Terms returned can be referenced by a tag for easy templating
   * Admin section is dead simple to use
 
-# Schema
+## Schema
 
 <pre>
 <code mysql>
@@ -97,7 +90,7 @@ COLLATE utf8_general_ci;
 </code>
 </pre>
 
-# Working Query
+## Working Query
 
 <pre>
 <code mysql>
@@ -118,7 +111,7 @@ GROUP BY terms_value;
 </code>
 </pre>
 
-# Demo of success
+## Demo of success
 
 <pre>
 <code>
@@ -196,6 +189,11 @@ GROUP BY terms_value;
 </code>
 </pre>
 
-# License
+## Author
+* Tim Habersack
+* tim@hithlonde.com
+* http://tim.hithlonde.com
+
+## License
 
 This is released as an open-source tool. The specific license will be added once I figure out what CodeIgniters license change means.

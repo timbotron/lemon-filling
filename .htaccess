@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|css|img|js|robots\.txt)
+RewriteRule ^(.*)$ /lemon-filling/index.php/$1 [L]

@@ -11,17 +11,19 @@ Locale is the language or languages your application will support. If it support
 
 Terms are any clump of text in your application. It could be a label in a form, or a paragraph in your help section. Terms are referenced by their **term_tag**.
 
-^ term_tag      ^ term      ^
-| about_text    | "Our application was designed with all citrus fruit lovers in mind and..."     | 
-| l_name    | "Username:"     |
-| l_pass    | "Password:"     |
+<table>
+  <tr><th>term_tag</th><th>term</th></tr>
+  <tr><td>about_text</td><td>"Our application was designed with all citrus fruit lovers in mind and..."</td></tr> 
+  <tr><td>l_name</td><td>"Username:"</td></tr>
+  <tr><td>l_pass</td><td>"Password:"</td></tr>
+</table>
 
 For example, in your template, you could have:
 
 <pre>
-<code php>
+
 <label><?php echo $term['l_name'];?></label>
-</code>
+
 </pre>
 
 ## Pages 

@@ -1,30 +1,44 @@
 <div class="container">
 	<div class="row">
-	<div class="offset3 span6">
+	<div class="span8 offset2">
 		<h2>Add Page</h2>
 		<?php echo validation_errors()."\n";
-				echo form_open(uri_string(),array('class'=>'well'))."\n";
+				echo form_open(uri_string())."\n";
 		?>
-		    
+		   <div class="well">
 		   <label for="page_name">Page Name:</label>
 		    
 		    <input class="input-large" type="text" name="page_name" maxlength="90" placeholder="welcome_screen" value="<?php echo set_value('page_name');?>"><br />
+		    <div class="row">
+		    	<div class="span3">
+		    		<label for="all_options">All Terms:</label>
+		    		<?php echo form_dropdown('all_options',
+		    								$terms_dropdown,
+		    								'',
+		    								'multiple="multiple" class="all_options input-medium"');?>
+				   
+				</div>
+				<div class="span1">
+					<br />
+			    	<button class="go_in btn"><i class="icon-chevron-right"></i></button>
+			    	<br /><br />
+			    	<button class="go_out btn"><i class="icon-chevron-left"></i></button>
+				</div>
+				<div class="span3">
+					<label for="chosen_options">Selected Terms:</label>
+			    	<select multiple="multiple" name="chosen_options" class="chosen_options input-medium">
+			    		
+		    		</select>
+		    	</div>
+			</div>
 
-		    <select multiple="multiple" name="all_options" class="all_options">
-		        <option value="1">One</option>
-		        <option value="2">Two</option>
-		        <option value="3">Three</option>
-		        <option value="4">Four</option>
-		        <option value="5">Five</option>
-		    </select>
-		    <button class="go_in">in</button>
-		    <button class="go_out">out</button>
-		    <select multiple="multiple" name="chosen_options" class="chosen_options">
-		        <option value="7">Seven</option>
-		    </select>
+			<div class="alert alert-info">
+				<strong>Term Preview:</strong><span class="preview_here"></span>
+			</div>
 		    
     
 		    <input type="submit" class="btn btn-primary" value="Save Page">
+			</div>
 
 		    </form>
 

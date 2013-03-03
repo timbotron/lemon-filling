@@ -183,6 +183,13 @@ class Dbmojo extends CI_Model {
 
 	}
 
+	function get_all_terms()
+	{
+		$sql = $this->db->get('terms');
+		return $sql->result_array();
+
+	}
+
 	function term_delete($terms_id)
 	{
 		$this->db->trans_start();

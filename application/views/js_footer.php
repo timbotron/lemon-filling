@@ -11,7 +11,7 @@ $("#define_lang").change(function() {
 	//alert('bam!');
 	window.location.href="<?php echo site_url($this->uri->segment(1).'/bulk_edit/');?>/"+$(this).val();
 	});
-$(".define_box").blur(function() {
+$(".define_box").change(function() {
 		//alert('unfocused! content is: '+$(this).text());
 		//working on submitting, so add cog
 		var $id=$(this).attr('id');
@@ -27,6 +27,18 @@ $(".define_box").blur(function() {
 					});
 		// <i class="icon-cog icon"></i>
 	});
+$('.go_in').click(function() {
+    return !$('.all_options option:selected').remove().appendTo('.chosen_options');
+});
+$('.go_out').click(function() {
+   return !$('.chosen_options option:selected').remove().appendTo('.all_options'); 
+});
+ 
+$('form').submit(function() {
+    $('.all_options option').prop('selected','');
+    $('.chosen_options option').prop('selected','selected');
+    alert($(this).serialize());
+});
 function load_imgs($passedid,$type)
 {
 	if($type=='loading')

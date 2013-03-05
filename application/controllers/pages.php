@@ -24,7 +24,7 @@ class Pages extends CI_Controller {
 	public function add()
 	{
 		$all_terms = $this->Dbmojo->get_all_terms();
-		$first_locale = $this->Dbmojo->get_first_locale();
+		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
 		$data['terms_dropdown'] = prep_terms_options($all_terms);
 
 		$this->load->library('form_validation');
@@ -32,7 +32,7 @@ class Pages extends CI_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('add_pages',$data); //form validation failed
-			$this->load->view('js_footer');
+			$this->load->view('js_footer',$footer);
 		}
 		else
 		{

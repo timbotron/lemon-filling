@@ -190,6 +190,17 @@ class Dbmojo extends CI_Model {
 
 	}
 
+	function term_wlocale($terms_id)
+	{
+		$locale_id = $this->get_first_locale();
+
+		$sql = "SELECT value
+				FROM rosetta
+				WHERE terms_id=? AND locale_id=?";
+		$sql = $this->db->query($sql,array($terms_id,$locale_id['locale_id']));
+		return $sql->row_array();
+	}
+
 	function term_delete($terms_id)
 	{
 		$this->db->trans_start();

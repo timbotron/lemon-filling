@@ -1,6 +1,6 @@
 </body>
 
-<script src="<?php echo site_url('/js/jquery-1.9.0.min.js');?>"></script>
+<script src="<?php echo site_url('/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?php echo site_url('/js/sorttable.js');?>"></script>
 <script type="text/javascript">
 $("#viewing_lang").change(function() {
@@ -32,6 +32,22 @@ $('.go_in').click(function() {
 });
 $('.go_out').click(function() {
    return !$('.chosen_options option:selected').remove().appendTo('.all_options'); 
+});
+$('.all_options').change(function() {
+	$('option:selected',this).each(function() {
+		console.log('boosh');
+		$.ajax({
+			dataType:'json',
+			url: '<?php echo site_url("/terms/json_view");?>'+"/"+$(this).val(),
+			data: '',
+			success: function(data)
+			{
+				console.log(data);
+				var result = $.parseJSON(data);
+				$('.preview_here').text(result.value);
+			}
+		})
+	});
 });
  
 $('form').submit(function() {

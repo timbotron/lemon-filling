@@ -25,11 +25,20 @@ class Terms extends CI_Controller {
 	public function view($locale_id)
 	{
 		$header['nav'] = make_nav('terms');
+		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
 		$this->load->view('header',$header);
 		$data['the_list']=$this->Dbmojo->get_terms('all_terms',$locale_id);
 		$data['locale_dropdown'] = $this->Dbmojo->get_lookup_array('locale');
 		$this->load->view('terms_index',$data);
-		$this->load->view('js_footer');
+		$this->load->view('js_footer',$footer);
+	}
+
+	public function json_view($terms_id)
+	{
+		//$data = $this->Dbmojo->term_wlocale($terms_id);
+		//print json_encode($data);
+		$data['things']='Sentence';
+		echo json_encode($data);
 	}
 
 	public function add($locale_id)

@@ -35,10 +35,9 @@ class Terms extends CI_Controller {
 
 	public function json_view($terms_id)
 	{
-		//$data = $this->Dbmojo->term_wlocale($terms_id);
-		//print json_encode($data);
-		$data['things']='Sentence';
-		echo json_encode($data);
+		header("Content-type: text/json");
+		$data = $this->Dbmojo->term_wlocale($terms_id);
+		echo utf8_encode(json_encode($data));
 	}
 
 	public function add($locale_id)
@@ -88,8 +87,8 @@ class Terms extends CI_Controller {
 	public function update()
 	{
 		$data = $this->Dbmojo->update_rosetta($this->input->post('id'),$this->input->post('content'));
-
-		echo json_encode($data);
+		header("Content-type: text/json");
+		echo utf8_encode(json_encode($data));
 		//echo json_encode($_POST);
 	}
 

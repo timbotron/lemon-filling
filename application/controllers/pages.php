@@ -29,6 +29,8 @@ class Pages extends CI_Controller {
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('page_name','Page Name','required|max_length[90]|alpha_dash');
+		$this->form_validation->set_error_delimiters('<div class="alert"><strong>Error</strong> ', '</div>');
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('add_pages',$data); //form validation failed
@@ -38,9 +40,39 @@ class Pages extends CI_Controller {
 		{
 			//form data ok, entering to db
 					
-			if($this->Dbmojo->pages_insert($this->input->post('page_name'),$this->input->post('chosen_terms')))
+			if($this->Dbmojo->pages_insert($this->input->post('page_name'),$this->input->post('chosen_options')))
 			{
 				$this->load->view('success',array('message'=>'<strong>'.$this->input->post('page_name').'</strong> was added successfully.')); //added successfully, so tell user				
+			}
+			else redirect('/error/badentry','refresh');
+			
+		}
+	}
+
+	public function edit($page_name)
+	{
+		$all_terms = $this->Dbmojo->get_all_terms();
+		$chosen_terms = $this->Dbmojo->get_terms_for_page($page_name);
+		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
+		$data['terms_dropdown'] = prep_terms_options($all_terms);
+		$data['chosen_terms_dropdown'] = prep_terms_options($chosen_terms);
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('page_name','Page Name','required|max_length[90]|alpha_dash');
+		$this->form_validation->set_error_delimiters('<div class="alert"><strong>Error</strong> ', '</div>');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('edit_pages',$data); //form validation failed
+			$this->load->view('js_footer',$footer);
+		}
+		else
+		{
+			//form data ok, entering to db
+					
+			if($this->Dbmojo->pages_update($this->input->post('page_name'),$this->input->post('chosen_options')))
+			{
+				$this->load->view('success',array('message'=>'<strong>'.$this->input->post('page_name').'</strong> was updated successfully.')); //added successfully, so tell user				
 			}
 			else redirect('/error/badentry','refresh');
 			

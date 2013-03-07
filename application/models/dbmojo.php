@@ -272,6 +272,38 @@ class Dbmojo extends CI_Model {
 		return $results;
 	}
 
+	function get_terms_for_page($page_name)
+	{
+		
+	}
+
+	function pages_insert($page_name,$chosen_options)
+	{
+		// First insert page name to pages
+		$this->db->trans_start();
+		$this->db->insert('page',array('value'=>$page_name));
+
+		// Get the page_id created
+		$page_id= $this->db->insert_id();
+
+		// foreach chosen_options, insert to page_group
+		foreach($chosen_options as $terms_id)
+		{
+			$this->db->insert('page_group',array('page_id'=>$page_id,'terms_id'=>$terms_id));
+		}
+
+		$this->db->trans_complete();
+
+		if($this->db->trans_status() === FALSE)
+		{
+		    return FALSE;
+		} 
+		else
+		{
+			return TRUE;
+		}
+	}
+
 
 	
 	

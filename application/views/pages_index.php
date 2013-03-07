@@ -14,7 +14,7 @@
 				<?
 					foreach($the_list as $value)
 					{
-						printf('<tr><td><a href="%s">%s</a></td><td><a href="%s" class="btn btn-small btn-warning pull-right"><i class="icon-edit icon-white"></i></a>',site_url('pages/view/'.$value['page_id']),$value['value'],site_url('/pages/edit/'.$value['page_id']));
+						printf('<tr><td><a href="%s">%s</a></td><td><a href="%s" class="btn btn-small btn-warning pull-right"><i class="icon-edit icon-white"></i></a>',site_url('pages/view/'.$value['value']),$value['value'],site_url('/pages/edit/'.$value['value']));
 					}
 
 				?>

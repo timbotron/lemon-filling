@@ -6,7 +6,13 @@ Lemon-filling is a tool to build localization (multi-language) support into your
 
 Lemon-filling is suitable for web-based and traditional applications. It is open-source and free to use.
 
-A demo of the admin area of Lemon-filling can be [found here](http://lab.citracode.com/lemon-filling/)
+### Demo
+
+A demo of the admin area of Lemon-filling can be [found here](http://lab.citracode.com/lemon-filling/).
+
+To see the localized data output:
+* [Dynamic JSON](http://lab.citracode.com/lemon-filling/pages/json/sign_in/1) of the 'sign_in' page with terms in English.
+* [Dynamic JSON](http://lab.citracode.com/lemon-filling/pages/json/sign_in/2) of the 'sign_in' page with terms in German.
 
 ### Locale
 

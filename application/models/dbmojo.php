@@ -80,15 +80,6 @@ class Dbmojo extends CI_Model {
 		}
 	}
 
-
-	function get_localeforedit($id='all')
-	{
-		$sql = "SELECT * FROM sierra_heat WHERE heat_id=?";
-		$sql = $this->db->query($sql,array($id));
-		return $sql->row_array();
-
-	}
-
 	function get_terms($page,$locale_id)
 	{
 
@@ -206,12 +197,10 @@ class Dbmojo extends CI_Model {
 		$this->db->trans_start();
 
 		# First delete all terms in rosetta that are set to that terms_id
-		$sql = "DELETE FROM rosetta WHERE terms_id=?";
-		$sql = $this->db->query($sql,array($terms_id));
+		$this->db->delete('rosetta',array('terms_id'=>$terms_id));
 
 		# Delete actual term entry
-		$sql = "DELETE FROM terms WHERE terms_id=?";
-		$sql = $this->db->query($sql,array($terms_id));
+		$this->db->delete('terms',array('terms_id'=>$terms_id));
 
 		$this->db->trans_complete();
 
@@ -269,12 +258,22 @@ class Dbmojo extends CI_Model {
 			$sql = $this->db->get('page');
 			$results = $sql->result_array();
 		}
+		else
+		{
+			$sql = $this->db->get_where('page',array('page_id'=>$page_id));
+			$results = $sql->row_array();
+		}
 		return $results;
 	}
 
-	function get_terms_for_page($page_name)
+	function get_terms_for_page($page_id)
 	{
-		
+		$sql = "SELECT terms.terms_id, terms.value
+				FROM page_group
+				INNER JOIN terms ON terms.terms_id = page_group.terms_id
+				WHERE page_id =?";
+		$sql = $this->db->query($sql,array($page_id));
+		return $sql->result_array();
 	}
 
 	function pages_insert($page_name,$chosen_options)
@@ -303,6 +302,29 @@ class Dbmojo extends CI_Model {
 			return TRUE;
 		}
 	}
+
+	function pages_delete($page_id)
+	{
+		$this->db->trans_start();
+
+		# First delete all rows in page_group with that id
+		$this->db->delete('page_group',array('page_id'=>$page_id));
+
+		# Delete actual pages entry
+		$this->db->delete('page',array('page_id'=>$page_id));
+
+		$this->db->trans_complete();
+
+		if($this->db->trans_status() === FALSE)
+		{
+		    return FALSE;
+		} 
+		else
+		{
+			return TRUE;
+		}
+	}
+
 
 
 	

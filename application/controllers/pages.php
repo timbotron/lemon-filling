@@ -49,13 +49,15 @@ class Pages extends CI_Controller {
 		}
 	}
 
-	public function edit($page_name)
+	public function edit($page_id)
 	{
 		$all_terms = $this->Dbmojo->get_all_terms();
-		$chosen_terms = $this->Dbmojo->get_terms_for_page($page_name);
+		$chosen_terms = $this->Dbmojo->get_terms_for_page($page_id);
 		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
 		$data['terms_dropdown'] = prep_terms_options($all_terms);
 		$data['chosen_terms_dropdown'] = prep_terms_options($chosen_terms);
+		$data['page_info'] = $this->Dbmojo->get_pages($page_id);
+		$data['terms_dropdown'] = array_diff($data['terms_dropdown'], $data['chosen_terms_dropdown']);
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('page_name','Page Name','required|max_length[90]|alpha_dash');
@@ -70,7 +72,7 @@ class Pages extends CI_Controller {
 		{
 			//form data ok, entering to db
 					
-			if($this->Dbmojo->pages_update($this->input->post('page_name'),$this->input->post('chosen_options')))
+			if($this->Dbmojo->pages_insert($this->input->post('page_name'),$this->input->post('chosen_options')) AND $this->Dbmojo->pages_delete($page_id))
 			{
 				$this->load->view('success',array('message'=>'<strong>'.$this->input->post('page_name').'</strong> was updated successfully.')); //added successfully, so tell user				
 			}
@@ -90,38 +92,19 @@ class Pages extends CI_Controller {
 	}
 
 
-	public function delete($terms_id,$verify='no')
+	public function delete($page_id)
 	{
-		$header['nav'] = make_nav('terms');
-		$this->load->view('header',$header);
-		$data['term']=$this->Dbmojo->get_term($terms_id);
-
-		if ($verify == 'no')
+		//form data ok, entering to db
+		if($this->Dbmojo->pages_delete($page_id))
 		{
-			$this->load->view('delete_term',$data); //form validation failed
+			$this->load->view('success',array('message'=>'the page was deleted successfully.')); //deleted successfully, so tell user
 		}
 		else
 		{
-			//form data ok, entering to db
-			if($this->Dbmojo->term_delete($terms_id))
-			{
-				$this->load->view('success',array('message'=>'<strong>'.$data['term']['value'].'</strong> was edited successfully.')); //added successfully, so tell user
-			}
-			else
-			{
-				redirect('/error/baddeletion','refresh');
-			}
-					
-			;
-		}		
+			redirect('/error/baddeletion','refresh');
+		}					
+				
 	}
-
-
-
-	
-
-
-
 
 
 }

@@ -3,6 +3,14 @@
 <script src="<?php echo site_url('/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?php echo site_url('/js/sorttable.js');?>"></script>
 <script type="text/javascript">
+// Caching imgs
+var load_gfx = new Image();
+load_gfx.src = "<?php echo site_url();?>/img/loading.gif";
+var load_gfx1 = new Image();
+load_gfx1.src = "<?php echo site_url();?>/img/glyphicons-halflings.png";
+var load_gfx2 = new Image();
+load_gfx2.src = "<?php echo site_url();?>/img/glyphicons-halflings-white.png";
+
 $("#viewing_lang").change(function() {
 	//alert('bam!');
 	window.location.href="<?php echo site_url($this->uri->segment(1).'/view/');?>/"+$(this).val();
@@ -21,7 +29,6 @@ $(".define_box").change(function() {
 					{id:$id,content:$(this).val()},
 					function(data)
 					{
-						console.log(data);
 						var result = data;
 						load_imgs($id,result.status);
 					});
@@ -52,6 +59,39 @@ $('.all_options').change(function() {
 	});
 
 });
+$('.pages_view').click(function() {
+	var the_dad = $(this).parent();
+	if(the_dad.children('.icon-minus').length>0)
+	{
+		the_dad.children('.icon-minus').remove();
+		the_dad.parent().next('.details').remove();
+	}
+	else
+	{
+		$(this).after(' <img class="loading" src="<?php echo site_url();?>/img/loading.gif">');
+		the_dad.prepend('<i class="icon-minus"></i>');
+		$.ajax({
+			dataType:'json',
+			url: '<?php echo site_url("/pages/json/");?>'+"/"+$(this).text()+"/"+'<?php echo $first_locale["locale_id"];?>',
+			data: '',			
+			success: function(data)
+			{
+				var output = "\n"+'<tr class="details"><td colspan="2"><table class="table table-condensed table-bordered"><thead><tr><th>Terms</th><th>Value</th></tr></thead><tbody>';
+				
+				for(var key in data)
+				{
+					output += "\n"+'<tr><td>'+key+'</td><td>'+data[key]+'</td></tr>';
+				}
+				output += "\n</tbody></table></td></tr>";
+				the_dad.parent().after(output);
+				the_dad.children('.loading').remove();
+
+			}
+		})
+
+	}
+
+});
  
 $('form').submit(function() {
     $('.all_options option').prop('selected','');
@@ -60,7 +100,6 @@ $('form').submit(function() {
 });
 function load_imgs($passedid,$type)
 {
-	console.log("#"+$passedid+"_img");
 	if($type=='loading')
 	{
 		$("#"+$passedid+"_img").html('<img src="<?php echo site_url();?>/img/loading.gif">');	

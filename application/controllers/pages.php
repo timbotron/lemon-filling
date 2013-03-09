@@ -8,21 +8,25 @@ class Pages extends CI_Controller {
             $this->load->helper(array('url','header','form','format'));
             $this->load->database();
 			$this->load->model('Dbmojo');
-			$header['nav'] = make_nav('pages');
-			$this->load->view('header',$header);
             
             // Your own constructor code
        }
 	public function index()
 	{
+		$header['nav'] = make_nav('pages');
+		$this->load->view('header',$header);
 		$data['the_list']=$this->Dbmojo->get_pages('all');
-		$first_locale = $this->Dbmojo->get_first_locale();
+		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
 
 		$this->load->view('pages_index',$data);
+		$this->load->view('js_footer',$footer);
 	}
+
 
 	public function add()
 	{
+		$header['nav'] = make_nav('pages');
+		$this->load->view('header',$header);
 		$all_terms = $this->Dbmojo->get_all_terms();
 		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
 		$data['terms_dropdown'] = prep_terms_options($all_terms);
@@ -51,6 +55,8 @@ class Pages extends CI_Controller {
 
 	public function edit($page_id)
 	{
+		$header['nav'] = make_nav('pages');
+		$this->load->view('header',$header);
 		$all_terms = $this->Dbmojo->get_all_terms();
 		$chosen_terms = $this->Dbmojo->get_terms_for_page($page_id);
 		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
@@ -81,19 +87,11 @@ class Pages extends CI_Controller {
 		}
 	}
 
-	public function view($page_id)
-	{
-		$header['nav'] = make_nav('terms');
-		$this->load->view('header',$header);
-		$data['the_list']=$this->Dbmojo->get_terms('all_terms',$page_id);
-		$data['locale_dropdown'] = $this->Dbmojo->get_lookup_array('locale');
-		$this->load->view('terms_index',$data);
-		$this->load->view('js_footer');
-	}
-
 
 	public function delete($page_id)
 	{
+		$header['nav'] = make_nav('pages');
+		$this->load->view('header',$header);
 		//form data ok, entering to db
 		if($this->Dbmojo->pages_delete($page_id))
 		{
@@ -104,6 +102,14 @@ class Pages extends CI_Controller {
 			redirect('/error/baddeletion','refresh');
 		}					
 				
+	}
+
+	public function json($page_name,$locale_id)
+	{
+		header("Content-type: text/json");
+		$data = $this->Dbmojo->get_terms($page_name,$locale_id);
+		$data = prep_json_terms($data);
+		echo utf8_encode(json_encode($data));
 	}
 
 

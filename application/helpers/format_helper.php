@@ -13,6 +13,17 @@ if ( ! function_exists('prep_terms_options'))
 		return $returnme;
 	}
 
+	function prep_json_terms($term_list)
+	{
+		$returnme = array();
+
+		foreach($term_list as $row)
+		{
+			$returnme[$row['terms_value']]=$row['rosetta_value'];
+		}
+		return $returnme;
+	}
+
 
 	
 	

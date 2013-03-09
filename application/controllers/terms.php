@@ -72,6 +72,7 @@ class Terms extends CI_Controller {
 		$header['nav'] = make_nav('terms');
 		$this->load->view('header',$header);
 		$data['locale_dropdown'] = $this->Dbmojo->get_lookup_array('locale');
+		$footer['first_locale'] = $this->Dbmojo->get_first_locale();
 		$temp = array_keys($data['locale_dropdown']);
 		sort($temp);
 		$temp = reset($temp);
@@ -80,7 +81,7 @@ class Terms extends CI_Controller {
 		$data['def_lang']=$temp;
 
 		$this->load->view('terms_bulkedit',$data);
-		$this->load->view('js_footer');
+		$this->load->view('js_footer',$footer);
 
 
 	}

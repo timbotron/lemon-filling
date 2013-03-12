@@ -202,6 +202,13 @@ GROUP BY terms_value;
 * tim@hithlonde.com
 * http://tim.hithlonde.com
 
+## Credits
+
+* [CodeIgniter](http://ellislab.com/codeigniter)
+* [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
+* [SortTable js library](http://www.kryogenix.org/code/browser/sorttable/)
+* [Icons by Glyphicons](http://glyphicons.com/)
+
 ## License
 
 Copyright 2013 Tim Habersack. Lemon-filling is released under a GPLv3 license.

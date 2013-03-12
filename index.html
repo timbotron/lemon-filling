@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Lemon-filling by timbotron</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Lemon-filling</h1>
+        <p>A tool to build localization (multi-language) support into your small to medium-sized application.</p>
+
+        <p class="view"><a href="https://github.com/timbotron/lemon-filling">View the Project on GitHub <small>timbotron/lemon-filling</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/timbotron/lemon-filling/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/timbotron/lemon-filling/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/timbotron/lemon-filling">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>Overview</h2>
+
+<p>Lemon-filling is a tool to build localization (multi-language) support into your small to medium-sized application. With Lemon-filling, you can create terms, define those terms in various locales, and group terms together into pages. Via MySQL query in your application, ask for a page, specify the locale you desire, and all terms on that page will be returned. Comes with web-based admin area to create and manage your localized content.</p>
+
+<p>Lemon-filling is suitable for web-based and traditional applications. It is open-source and free to use.</p>
+
+<h2>Breakdown</h2>
+
+<p>Lemon-filling works by breaking up the complex idea of localizing your application into three simple categories.</p>
+
+<h3>Locale</h3>
+
+<p>Locale is the language or languages your application will support. If it supports English and Deutch, then those are the locales. Also, the <strong>localeid</strong> would probably be 1 and 2, respectively.</p>
+
+<h3>Terms</h3>
+
+<p>Terms are any clump of text in your application. It could be a label in a form, or a paragraph in your help section. Terms are referenced by their <strong>term_tag</strong>.</p>
+
+<table>
+<tr>
+<th>term_tag</th>
+<th>term</th>
+</tr>
+<tr>
+<td>about_text</td>
+<td>"Our application was designed with all citrus fruit lovers in mind and..."</td>
+</tr>
+<tr>
+<td>l_name</td>
+<td>"Username:"</td>
+</tr>
+<tr>
+<td>l_pass</td>
+<td>"Password:"</td>
+</tr>
+</table><h3>Pages</h3>
+
+<p>A page is any total 'page' for your application. For example if you have an 'Add Post' page in your app, you would create a page in the admin tool called 'add_post', and then attach any terms that would belong in that page.</p>
+
+<h2>Demo</h2>
+
+<p>A demo of the admin area of Lemon-filling can be <a href="http://lab.citracode.com/lemon-filling/">found here</a>.</p>
+
+<p>To see the localized data output:</p>
+
+<ul>
+<li>
+<a href="http://lab.citracode.com/lemon-filling/pages/json/sign_in/1">Dynamic JSON</a> of the 'sign_in' page with terms in English.</li>
+<li>
+<a href="http://lab.citracode.com/lemon-filling/pages/json/sign_in/2">Dynamic JSON</a> of the 'sign_in' page with terms in German.</li>
+</ul><h2>Author</h2>
+
+<ul>
+<li>Tim Habersack</li>
+<li><a href="mailto:tim@hithlonde.com">tim@hithlonde.com</a></li>
+<li><a href="http://tim.hithlonde.com">http://tim.hithlonde.com</a></li>
+</ul><h2>License</h2>
+
+<p>Copyright 2013 Tim Habersack. Lemon-filling is released under a GPLv3 license.</p>
+
+<p>Lemon-filling is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+
+<p>Lemon-filling is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with Lemon-filling.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<p>This is released as open-source.</p>
+
+<ul>
+<li>All CodeIgniter-based code (system/,index.php) is released under their own open-source license agreement (see ci-license.txt).</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/timbotron">timbotron</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-39226417-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

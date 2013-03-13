@@ -6,18 +6,13 @@ Lemon-filling is a tool to build localization (multi-language) support into your
 
 Lemon-filling is suitable for web-based and traditional applications. It is open-source and free to use.
 
-### Demo
+## Breakdown
 
-A demo of the admin area of Lemon-filling can be [found here](http://lab.citracode.com/lemon-filling/).
-
-To see the localized data output:
-* [Dynamic JSON](http://lab.citracode.com/lemon-filling/pages/json/sign_in/1) of the 'sign_in' page with terms in English.
-* [Dynamic JSON](http://lab.citracode.com/lemon-filling/pages/json/sign_in/2) of the 'sign_in' page with terms in German.
+Lemon-filling works by breaking up the complex idea of localizing your application into three simple components.
 
 ### Locale
 
 Locale is the language or languages your application will support. If it supports English and Deutch, then those are the locales. Also, the **localeid** would probably be 1 and 2, respectively.
-
 
 ### Terms
 
@@ -34,11 +29,13 @@ Terms are any clump of text in your application. It could be a label in a form, 
 
 A page is any total 'page' for your application. For example if you have an 'Add Post' page in your app, you would create a page in the admin tool called 'add_post', and then attach any terms that would belong in that page.
 
-## Overall Requirements
+## Demo
 
-  * By passing a query a page-name and locale id, get all the terms for that page
-  * Terms returned can be referenced by a tag for easy templating
-  * Admin section is dead simple to use
+A demo of the admin area of Lemon-filling can be [found here](http://lab.citracode.com/lemon-filling/).
+
+To see the localized data output:
+* [Dynamic JSON](http://lab.citracode.com/lemon-filling/pages/json/sign_in/1) of the 'sign_in' page with terms in English.
+* [Dynamic JSON](http://lab.citracode.com/lemon-filling/pages/json/sign_in/2) of the 'sign_in' page with terms in German.
 
 ## Schema
 

@@ -28,6 +28,7 @@
 				<tr>
 					<th>Locale ID</th>
 					<th>Locale Name</th>	
+					<th>Percent Complete</th>
 					<th></th>				
 				</tr>
 			</thead>
@@ -35,9 +36,11 @@
 				<?php foreach($the_list as $entry):?>
 				<tr class="vcenter">
 					<td class="vcenter"><?php echo $entry['locale_id'];?></td>
-					<td class="vcenter"><?php echo $entry['value'];?></td>					
+					<td class="vcenter"><?php echo $entry['value'];?> </td>		
+					<td class="vcenter"><?php echo number_format(((int)$entry['defined_terms'] / (int)$entry['total_terms']),2)*100;?>%</td>			
 					<td class="vcenter"><a href="<?php echo site_url("locale/edit/".$entry['locale_id']); ?>" class="btn btn-small btn-warning pull-right"><i class="icon-edit icon-white"></i></a></td>
 				</tr>
+				
 				<?php endforeach;?>
 			</tbody>
 		</table>

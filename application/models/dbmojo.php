@@ -27,13 +27,25 @@ class Dbmojo extends CI_Model {
 	{
 		if($id=='all')
 		{
-			$sql = "SELECT * FROM locale";
+			$sql = "SELECT (SELECT COUNT(terms_id) FROM terms) AS total_terms,
+							COUNT(rosetta.rosetta_id) as defined_terms,
+							locale.*
+					FROM terms
+					LEFT JOIN rosetta ON rosetta.terms_id=terms.terms_id
+					RIGHT JOIN locale ON rosetta.locale_id=locale.locale_id
+					GROUP BY rosetta.locale_id ORDER BY locale.locale_id";
 			$sql = $this->db->query($sql);
 			return $sql->result_array();
 		}
 		else
 		{
-			$sql = "SELECT * FROM locale WHERE locale_id=?";
+			$sql = "SELECT (SELECT COUNT(terms_id) FROM terms) AS total_terms,
+							COUNT(rosetta.rosetta_id) as defined_terms,
+							locale.*
+					FROM terms
+					LEFT JOIN rosetta ON rosetta.terms_id=terms.terms_id
+					RIGHT JOIN locale ON rosetta.locale_id=locale.locale_id
+					WHERE locale.locale_id=? GROUP BY rosetta.locale_id ORDER BY locale.locale_id";
 			$sql = $this->db->query($sql,array($id));
 			return $sql->row_array();
 		}

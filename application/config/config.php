@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://lab.citracode.com/lemon-filling/';
+$config['base_url']	= 'http://lemonfilling.localhost';
 
 /*
 |--------------------------------------------------------------------------

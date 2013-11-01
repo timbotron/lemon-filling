@@ -2,7 +2,7 @@
 
 ## Overview
 
-Lemon-filling is a tool to build localization (multi-language) support into your small to medium-sized application. With Lemon-filling, you can create terms, define those terms in various locales, and group terms together into pages. Via MySQL query in your application, ask for a page, specify the locale you desire, and all terms on that page will be returned. Comes with web-based admin area to create and manage your localized content.
+Lemon-filling is a tool to build i18n support into your small to medium-sized application. With Lemon-filling, you can create terms, define those terms in various locales, and group terms together into pages. Via MySQL query in your application, ask for a page, specify the locale you desire, and all terms on that page will be returned. Comes with web-based admin area to create and manage your localized content.
 
 Lemon-filling is suitable for web-based and traditional applications. It is open-source and free to use.
 

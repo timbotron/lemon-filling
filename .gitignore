@@ -2,5 +2,5 @@
 */logs/!index.html
 */cache/*
 */cache/!index.html
-*/database.php
+*/config/development
 .DS_Store
